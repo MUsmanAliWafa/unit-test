@@ -1,0 +1,151 @@
+/* @import "tailwindcss";
+
+.root {
+    --color-text: #000000;
+    --color-bg: #ffffff;
+    --color-elev: #f7f7f7;
+    --color-muted: #6b7280;
+    --color-primary: #0b74ff;
+    --color-border: #e5e7eb;
+}
+
+.dark {
+    --color-text: #e6e4e1;
+    --color-bg: #0b0b0c;
+    --color-elev: #111214;
+    --color-muted: #9ca3af;
+    --color-primary: #3b82f6;
+    --color-border: #242526;
+}
+
+.text-text {
+    color: var(--color-text) !important;
+}
+.bg-bg {
+    background-color: var(--color-bg) !important;
+}
+.bg-elev {
+    background-color: var(--color-elev) !important;
+}
+.text-muted {
+    color: var(--color-muted) !important;
+}
+.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+.border-theme {
+    border-color: var(--color-border) !important;
+} */
+
+@import "tailwindcss";
+/* Theme variables: Cream background + bluish-gray accents for a warm professional look */
+.root {
+    --color-text: #0f1724;
+    --color-bg: #fbf7f0;
+    --color-elev: #f2ece5;
+    --color-muted: #6b7280;
+    --color-primary: #5b6b82;
+    --color-border: #e6dfd6;
+    --color-success: #2f7a4a;
+    --color-danger: #b33a3a;
+}
+
+.dark {
+    --color-text: #e6e6e6;
+    --color-bg: #0b1220;
+    --color-elev: #0f1724;
+    --color-muted: #9aa3b2;
+    --color-primary: #7d8aa0;
+    --color-border: #1b2430;
+    --color-success: #3fb06b;
+    --color-danger: #ff7b7b;
+}
+@theme {
+    --color-elev: var(--color-elev);
+    --color-muted: var(--color-muted);
+    --color-primary: var(--color-primary);
+    --color-bg: var(--color-bg);
+    --color-text: var(--color-text);
+    --color-border: var(--color-border);
+    --color-success: var(--color-success);
+    --color-danger: var(--color-danger);
+}
+.text-text {
+    color: var(--color-text) !important;
+}
+.bg-bg {
+    background-color: var(--color-bg) !important;
+}
+.bg-elev {
+    background-color: var(--color-elev) !important;
+}
+.text-muted {
+    color: var(--color-muted) !important;
+}
+.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+.border-theme {
+    border-color: var(--color-border) !important;
+}
+.text-success {
+    color: var(--color-success) !important;
+}
+.text-danger {
+    color: var(--color-danger) !important;
+}
+
+ 
+ @layer base {
+  body.theme-transition {
+    opacity: 0.8;
+    transform: scale(0.98);
+    filter: blur(3px);
+    transition:
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body.theme-fade {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+    transition:
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+
+
+@layer utilities {
+
+
+  
+  @keyframes theme-icon-rotate {
+    0% {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    40% {
+      transform: rotate(180deg) scale(0.9);
+      opacity: 0.6;
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+      opacity: 1;
+    }
+  }
+   .animate-theme-icon {
+  animation: theme-icon-rotate 0.3s ease-in-out;
+}
+
+
+
+}
