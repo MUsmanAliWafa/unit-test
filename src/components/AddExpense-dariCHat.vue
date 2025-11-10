@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { useTransactionsStore } from '@/stores/transactionsStore'
-import SuccessModal from '@/components/SuccessModal.vue'
+import { useTransactionsStore } from '../stores/transactionsStore'
+import SuccessModal from '../components/SuccessModal.vue'
 
 const emit = defineEmits(['close', 'saved'])
 const store = useTransactionsStore()
