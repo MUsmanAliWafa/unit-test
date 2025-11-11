@@ -89,19 +89,37 @@
                     class="px-4 py-2 rounded bg-success text-bg">
                     Simpan
                 </button>
-                
             </div>
         </div>
     </div>
+    <KondisiModal
+  :show="showSuccess"
+  :detail="successData"
+  type="success"
+  mode="expense"
+  @close="showSuccess = false"
+/>
+
+<KondisiModal
+  :show="showError"
+  :error="errorData"
+  type="error"
+  mode="expense"
+  @close="showError = false"
+/>
+
 </template>
 
 <script setup>
 import { ref, computed, watch } from "vue";
 import { useTransactionsStore } from "../stores/transactionsStore";
 import { formatRupiah, parseRupiah } from "../utils/formatRupiah";
+import KondisiModal from "./KondisiModal.vue";
 
-
-
+const showSuccess = ref(false);
+const showError = ref(false);
+const successData = ref({});
+const errorData = ref({});
 
 const props = defineProps({ show: Boolean });
 const emit = defineEmits(["close", "saved"]);
@@ -151,32 +169,50 @@ function reset() {
     amountStr.value = "";
 }
 
+// async function onSave() {
+//     if (!year.value || !month.value) {
+//         alert("Pilih tahun dan bulan yang tersedia.");
+//         return;
+//     }
+//     if (!amountStr.value) {
+//         alert("Masukkan nominal pengeluaran.");
+//         return;
+//     }
+//     const amount = parseRupiah(amountStr.value);
+//     try {
+//         await store.addExpense({
+//             year: Number(year.value),
+//             month: Number(month.value),
+//             day: Number(day.value),
+//             time: time.value || "00:00",
+//             description: description.value || "-",
+//             amount,
+//         });
+//         alert("Pengeluaran berhasil ditambahkan.");
+//         emit("saved");
+//         emit("close");
+//         reset();
+//     } catch (e) {
+//         console.error(e);
+//         alert("Terjadi kesalahan saat menambahkan pengeluaran.");
+//     }
+// }
 async function onSave() {
-    if (!year.value || !month.value) {
-        alert("Pilih tahun dan bulan yang tersedia.");
-        return;
-    }
-    if (!amountStr.value) {
-        alert("Masukkan nominal pengeluaran.");
-        return;
-    }
-    const amount = parseRupiah(amountStr.value);
     try {
-        await store.addExpense({
-            year: Number(year.value),
-            month: Number(month.value),
-            day: Number(day.value),
-            time: time.value || "00:00",
-            description: description.value || "-",
-            amount,
-        });
-        alert("Pengeluaran berhasil ditambahkan.");
-        emit("saved");
         emit("close");
-        reset();
-    } catch (e) {
-        console.error(e);
-        alert("Terjadi kesalahan saat menambahkan pengeluaran.");
+
+        showSuccess.value = true; // munculkan modal sukses
+
+        const result = await store.addExpense(payload);
+
+        successData.value = result;
+    } catch (err) {
+        showSuccess.value = false;
+        showError.value = true; // munculkan modal error
+
+        errorData.value = err.response?.data || {
+            message: "Terjadi kesalahan",
+        };
     }
 }
 </script>

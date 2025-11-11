@@ -52,7 +52,7 @@ import DailyExpenses from '../components/DailyExpenses.vue'
 import { useTransactionsStore } from '../stores/transactionsStore'
 
 // tes SuccessModal
-import SuccessModal from '../components/SuccessModal.vue'
+import SuccessModal from '../components/KondisiModal.vue'
 const showTest = ref(false)
 const testDetail = ref({ year: 2025, month: 10, day: 29, time: '12:00', description: 'Tes Modal', amount: 150000 })
 
