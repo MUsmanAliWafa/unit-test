@@ -96,8 +96,8 @@
 
 <script setup>
 import { ref, computed, watch } from "vue";
-import { useTransactionsStore } from "../stores/transactionsStore";
-import { formatRupiah, parseRupiah } from "../utils/formatRupiah";
+import { useTransactionsStore } from "../../stores/transactionsStore";
+import { formatRupiah, parseRupiah } from "../../utils/formatRupiah";
 
 const props = defineProps({ show: Boolean });
 const emit = defineEmits(["close", "saved"]);
